@@ -14,13 +14,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const { auth} = usePuterStore()
+  const { puterReady, auth, isLoading} = usePuterStore()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!auth.isAuthenticated) navigate('/auth?next');
-  }, [auth.isAuthenticated])
-
+    if(!auth.isAuthenticated && !isLoading) navigate('/auth?next=/');
+  }, [auth.isAuthenticated, isLoading])
 
   return (
     <main className="bg-cover bg-[url('/images/bg-main.svg')] ">
